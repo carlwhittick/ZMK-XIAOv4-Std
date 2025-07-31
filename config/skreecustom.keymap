@@ -21,6 +21,16 @@
             flavor = "tap-preferred";
             tapping-term-ms = <100>;
         };
+
+        backspace_or_shift: backspace_or_shift {
+            compatible = "zmk,behavior-hold-tap";
+            label = "BACKSPACE_OR_SHIFT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <100>;
+            flavor = "tap-preferred";
+        };
     };
 
     keymap {
@@ -28,14 +38,14 @@
 
         default_layer {
             bindings = <
-&kp ESC    &kp N1     &kp N2    &kp N3    &kp N4     &kp N5          &kp N6         &kp N7                     &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB    &kp Q      &kp W     &kp E     &kp R      &kp T           &kp Y          &kp U                      &kp I      &kp O     &kp P     &kp BSLH
-&kp CAPS   &kp A      &kp S     &kp D     &kp F      &kp G           &kp H          &kp J                      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z      &kp X     &kp C     &kp V      &kp B           &kp N          &kp M                      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-           &kp GRAVE  &kp BSLH  &kp LEFT  &kp RIGHT                                 &kp UP                     &kp DOWN   &kp LBKT  &kp RBKT
-                                          &kp LCTRL  &kp LALT        &kp HOME       &kp END
-                                &kp BSPC  &kp DEL    &kp HOME        &trans         &enter_or_symbols 4 ENTER  &kp SPACE
-                                                     &kp LEFT_WIN    &kp RIGHT_WIN
+&kp ESC    &kp N1  &kp N2  &kp N3                                    &kp N4     &kp N5          &kp N6         &kp N7                     &kp N8        &kp N9   &kp N0    &kp MINUS
+&kp TAB    &kp Q   &kp W   &kp E                                     &kp R      &kp T           &kp Y          &kp U                      &kp I         &kp O    &kp P     &kp BSLH
+&kp CAPS   &kp A   &kp S   &kp D                                     &kp F      &kp G           &kp H          &kp J                      &kp K         &kp L    &kp SEMI  &kp SQT
+&kp LSHFT  &kp Z   &kp X   &kp C                                     &kp V      &kp B           &kp N          &kp M                      &kp COMMA     &kp DOT  &kp FSLH  &kp RSHFT
+           &trans  &trans  &kp LEFT                                  &kp RIGHT                                 &kp DOWN                   &kp UP_ARROW  &trans   &trans
+                                                                     &kp LCTRL  &kp LALT        &kp HOME       &kp END
+                           &backspace_or_shift LEFT_SHIFT BACKSPACE  &kp TAB    &kp HOME        &trans         &enter_or_symbols 4 ENTER  &kp SPACE
+                                                                                &kp LEFT_WIN    &kp RIGHT_WIN
             >;
         };
 
