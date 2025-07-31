@@ -9,23 +9,33 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/pointing.h>
-#include <dt-bindings/zmk/rgb.h>
 
 / {
+    behaviors {
+        enter_or_symbols: enter_or_symbols {
+            compatible = "zmk,behavior-hold-tap";
+            label = "ENTER_OR_SYMBOLS";
+            bindings = <&to>, <&kp>;
+
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <100>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
-&kp ESC    &kp N1     &kp N2    &kp N3    &kp N4     &kp N5      &kp N6     &kp N7     &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB    &kp Q      &kp W     &kp E     &kp R      &kp T       &kp Y      &kp U      &kp I      &kp O     &kp P     &kp BSLH
-&kp CAPS   &kp A      &kp S     &kp D     &kp F      &kp G       &kp H      &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z      &kp X     &kp C     &kp V      &kp B       &kp N      &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-           &kp GRAVE  &kp BSLH  &kp LEFT  &kp RIGHT                         &kp UP     &kp DOWN   &kp LBKT  &kp RBKT
-                                          &kp LCTRL  &kp LALT    &kp RGUI   &kp RCTRL
-                                &kp BSPC  &kp DEL    &kp HOME    &kp PG_UP  &kp RET    &kp SPACE
-                                                     &kp END     &kp PG_DN
+&kp ESC    &kp N1     &kp N2    &kp N3    &kp N4     &kp N5          &kp N6         &kp N7                     &kp N8     &kp N9    &kp N0    &kp MINUS
+&kp TAB    &kp Q      &kp W     &kp E     &kp R      &kp T           &kp Y          &kp U                      &kp I      &kp O     &kp P     &kp BSLH
+&kp CAPS   &kp A      &kp S     &kp D     &kp F      &kp G           &kp H          &kp J                      &kp K      &kp L     &kp SEMI  &kp SQT
+&kp LSHFT  &kp Z      &kp X     &kp C     &kp V      &kp B           &kp N          &kp M                      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
+           &kp GRAVE  &kp BSLH  &kp LEFT  &kp RIGHT                                 &kp UP                     &kp DOWN   &kp LBKT  &kp RBKT
+                                          &kp LCTRL  &kp LALT        &kp HOME       &kp END
+                                &kp BSPC  &kp DEL    &kp HOME        &trans         &enter_or_symbols 4 ENTER  &kp SPACE
+                                                     &kp LEFT_WIN    &kp RIGHT_WIN
             >;
         };
 
@@ -67,9 +77,21 @@
                                              &trans    &trans
             >;
         };
+
+        Symbols {
+            bindings = <
+&trans  &trans         &trans      &trans        &trans        &trans           &trans      &trans             &trans                &trans         &trans             &trans
+&trans  &kp LS(EXCL)   &kp LS(AT)  &kp LS(LBRC)  &kp LS(RBRC)  &kp LS(PIPE)     &kp DOLLAR  &kp LESS_THAN      &kp GREATER_THAN      &kp MINUS      &kp LS(PLUS)       &trans
+&trans  &kp LS(POUND)  &kp DOLLAR  &kp LS(LPAR)  &kp LS(RPAR)  &kp GRAVE        &kp CARET   &kp LEFT_BRACKET   &kp RIGHT_BRACKET     &kp LS(UNDER)  &kp EQUAL          &trans
+&trans  &kp LS(PRCNT)  &kp CARET   &kp LS(AMPS)  &kp LS(PLUS)  &kp LS(TILDE)    &kp DOLLAR  &kp DOUBLE_QUOTES  &kp LS(SINGLE_QUOTE)  &kp QUESTION   &kp LS(BACKSLASH)  &trans
+        &trans         &trans      &trans        &trans                                     &trans             &trans                &trans         &trans
+                                                 &trans        &trans           &trans      &trans
+                                   &trans        &trans        &trans           &trans      &trans             &trans
+                                                               &trans           &trans
+            >;
+        };
     };
 };
-
 
 // //right hand trackball overrides
 // &trackball_peripheral_listener {
