@@ -42,6 +42,14 @@
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
         };
+        tap_repeat_multitap: tap_repeat_multitap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TAP_REPEAT_MULTITAP";
+            bindings = <&kp>, <&kp>;
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+        };
     };
 
     keymap {
@@ -51,11 +59,11 @@
             bindings = <
 &kp ESC     &kp N1  &kp N2  &kp N3                           &kp N4         &kp N5          &kp N6         &kp N7       &kp N8        &kp N9   &kp N0      &trans
 &trans      &kp Q   &kp W   &kp E                            &kp R          &kp T           &kp Y          &kp U        &kp I         &kp O    &kp P       &trans
-&kp ESCAPE  &kp A   &kp S   &kp D                            &kp F          &kp G           &kp H          &kp J        &kp K         &kp L    &lt 3 SEMI  &kp SINGLE_QUOTE
+&kp ESCAPE  &kp A   &kp S   &kp D                            &kp F          &kp G           &kp H          &kp J        &kp K         &kp L    &kp SEMI    &kp SINGLE_QUOTE
 &trans      &kp Z   &kp X   &kp C                            &kp V          &kp B           &kp N          &kp M        &kp COMMA     &kp DOT  &kp FSLH    &trans
             &trans  &trans  &kp LEFT                         &kp RIGHT                                     &kp DOWN     &kp UP_ARROW  &trans   &mo 1
                                                              &kp LCTRL      &kp LALT        &kp HOME       &kp END
-                            &better_mt LEFT_SHIFT BACKSPACE  &mt LCTRL TAB  &kp HOME        &sl 6          &lt 4 ENTER  &kp SPACE
+                            &tap_repeat_multitap LEFT_SHIFT BACKSPACE  &mt LCTRL TAB  &kp HOME        &sl 6          &kp ENTER    &kp SPACE
                                                                             &kp LEFT_WIN    &kp RIGHT_WIN
             >;
         };
@@ -86,18 +94,6 @@
             >;
         };
 
-        layer_3 {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans       &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans       &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans       &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans       &trans    &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans                         &trans  &trans  &trans  &trans
-                                &bootloader  &trans    &trans  &trans
-                        &trans  &trans       &trans    &trans  &trans  &trans
-                                             &trans    &trans
-            >;
-        };
 
         Symbols {
             bindings = <
@@ -140,17 +136,6 @@
     };
 };
 
-// //right hand trackball overrides
-// &trackball_peripheral_listener {
-//     input-processors =
-//         <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,//this gets it to the default installation orientation
-//         <&zip_temp_layer 3 500>;//activate layer 3 within 500ms of the trackball moving
-// };
-// //left hand trackball overrides
-// &trackball_central_listener {
-//     input-processors = 
-//         <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,//this gets it to the default installation orientation
-//         <&zip_xy_scaler 1 3>,//multiply sensitivity by 1, divide by 3 (make it slower for scrolling)
-//         <&zip_xy_to_scroll_mapper>,//make this trackball output scrolling events by default instead of cursor movement
-//         <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;//invert vertical scrolling so that the view moves in the same direction as the top of the trackball.
-// };
+// Input processor for tap repeat functionality
+// Note: This would need to be properly configured based on your specific input device
+
